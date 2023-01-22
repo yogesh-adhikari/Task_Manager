@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials::head"/>
+<body>
+
+<!--Main NavBar START-->
+<nav th:replace="partials::landingNavbar"/>
+<!--Main NavBar END-->
+
+<!--Welcome Section START-->
+<section class="pt-4 pt-md-11">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-5 col-lg-6 order-md-2">
+                <!-- Image -->
+                <img src="/images/task1.jpg"
+                     class="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0 aos-init aos-animate" alt="Tracking Animation"
+                     data-aos="fade-up" data-aos-delay="100">
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 order-md-1 aos-init aos-animate" data-aos="fade-up">
+
+                <!-- Heading -->
+                <h1 class="display-3 text-center text-md-start">
+                    Welcome to <span class="text-primary">Track'em</span> <br>
+                    Stay on the top of your task
+                </h1>
+
+                <!-- Text -->
+                <p class="lead text-center text-md-start text-muted mb-6 mb-lg-8">
+                    Keep Up With Your Speed
+                </p>
+
+                <!-- Buttons -->
+                <div class="text-center text-md-start">
+                    <a th:href= "@{/sign-up}" class="btn btn-primary shadow lift me-4">Create Account
+                        <i class="fa-sharp fa-solid fa-user d-none d-md-inline ms-3"></i>
+                    </a>
+                    <a th:href= "@{/login}" class="btn btn-primary lift">Login
+                        <i class="fa fa-sign-in d-none d-md-inline ms-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- / .row -->
+    </div> <!-- / .container -->
+</section>
+<!--Welcome Section END-->
+
+<!--Information Cards START-->
+<div class="container p-5">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="/images/task2.webp" class="card-img-top p-2" alt="Moving Checklist" style="width: 100%;
+            object-fit: cover;"/>
+                <div class="card-body">
+                    <h5 class="card-title">Task Tracking</h5>
+                    <p class="card-text">
+                        Monitor your todo's and choose your priorities.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center">
+                <img src="/images/task3.png" class="card-img-top mx-auto" alt="Project Breakdown" style="width: 50%;
+            object-fit: cover;"/>
+                <div class="card-body">
+                    <h5 class="card-title">Task Breakdown</h5>
+                    <p class="card-text">
+                        Separate your task by the due date to see what's more important.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Information Cards END-->
+
+<!--    Javascript files for image upload-->
+<div th:replace="partials::scriptTags"/>
+</body>
+</html>
