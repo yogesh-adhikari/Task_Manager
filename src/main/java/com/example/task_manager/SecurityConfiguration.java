@@ -62,10 +62,10 @@ public class SecurityConfiguration {
                 .authenticated()
 
 
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
 
 //                *****************************************************************************
                 .and()
