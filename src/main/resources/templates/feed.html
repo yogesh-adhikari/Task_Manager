@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="partials::head"/>
+<body>
+
+<!--Main Navbar-->
+<nav th:replace="partials::profileNavbar"/>
+
+<!--Primary Content-->
+<main>
+    <!-- Container START -->
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- Sidenav START -->
+            <div th:replace="partials::sideNavbar"/>
+            <!-- Sidenav END -->
+
+
+            <!-- Main content START -->
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+                <!-- Top Performing Portfolio START -->
+                <!--PUT carousel here with top portfolios-->
+                <!-- Top Performing PortfolioEND -->
+                <!-- Search Posts -->
+                <div class="card card-body form-group d-flex justify-content-end">
+                    <form class="form-group w-100 col-md-8 col-lg-6" th:action="@{/searchTask}" method="get">
+                        <input size="50" class="form-group rounded" type="text" name="keyword" th:value="${keyword}" placeholder="Find Post">
+                        <button type="submit" class="rounded">Search</button>
+                    </form>
+                </div>
+
+                <!-- Share feed START -->
+                <div class="card card-body">
+                    <div class="d-flex mb-3">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <a href="#"> <img class="avatar-img " src="images/AS_31.jpg" alt=""> </a>
+                        </div>
+                        <!-- Post input -->
+                        <form class="w-100" th:action="@{/tasks/create}" th:method="post" th:object="${newTask}">
+                            <textarea th:field="*{description}" class="form-control pe-4 border-0" rows="2"
+                                      data-autoresize="" placeholder="Create your task"></textarea>
+                            <button class="btn shareBtn mt-2 me-1" id="imageButton" type="button"><i class="fa-regular fa-image"></i>
+                                picture
+                            </button>
+                            <button class="btn shareBtn mt-2 me-1" id="videoButton" type="button"><i class="fa-solid fa-video"></i> video
+                            </button>
+                            <button class="btn shareBtn mt-2" type="submit">
+                                <i class="fa-solid fa-square-share-nodes" style="color: white"></i>
+                                share
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Share feed END -->
+
+
+
+                <!-- Card feed item START -->
+                <div th:each="task: ${tasks}">
+
+                    <!--//Post Card item START-->
+                    <div class="card ">
+
+                        <!--Card header START-->
+                        <div class="card-header" th:id="'task'+${task.id}">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <!--Avatar-->
+                                    <img th:src="${task.getUser().profilePicture}" class="rounded-circle mb-3"
+                                         style="width: 50px;" alt="Avatar"/>
+                                    <!--Info-->
+                                    <!--                <h5 class="mb-2"><strong th:text="${post.getUser().firstName}"></strong> <strong th:text="${post.getUser().lastName}"></strong></h5>-->
+                                    <div>
+                                        <div class="nav nav-divider">
+                                            <!--INPUT USER PROFILE LINK-->
+                                            <h6 class="nav-item card-title mb-0"><a th:href="@{/userProfile/{id}(id = ${task.getUser().id})}"> <strong
+                                                    th:text="${task.getUser().firstName}"></strong> <strong
+                                                    th:text="${task.getUser().lastName}"></strong> </a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Card header END-->
+
+                        <!--Card body START-->
+                        <div class="card-body">
+                            <!--Task Description-->
+                            <p class="card-text"  th:text="${task.description}"></p>
+
+                            <!--Post Reaction Items START-->
+                            <div class="d-flex align-items-center justify-content-between mt-2">
+                                <form th:action="@{/like/post}" th:method="post">
+                                    <input hidden name="postId" th:value="${post.id}">
+
+                                    <button class="btn" type="submit">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                        <span class="badge bg-secondary" th:text="${post.likes.size()}"></span>
+                                    </button>
+
+                                </form>
+
+                                <form th:action="@{/dislike/post}" th:method="post">
+                                    <input hidden name="postId" th:value="${post.id}">
+                                    <button class="btn" type="submit">
+                                        <i class="fa-solid fa-thumbs-down"></i>
+                                        <span class="badge bg-secondary" th:text="${post.dislikes.size()}"></span>
+                                    </button>
+
+                                </form>
+
+                                <button class="btn shareBtn" data-bs-toggle="collapse" th:attr="data-bs-target='#collapse'+${post.id}"
+                                        aria-expanded="false" aria-controls="collapseExample">
+                                    Comments
+                                    <span class="badge ms-1" th:text="${post.getComments().size()}"></span>
+                                </button>
+
+                            </div>
+                            <!--Post Reaction Items END-->
+
+                        </div>
+                        <!--Card body END-->
+
+                    </div>
+                    <!--//Post Card item START-->
+
+                </div>
+                <!-- Card feed item END -->
+
+
+            </div>
+            <!-- Main content END -->
+
+        </div>
+        <!-- Row END -->
+    </div>
+    <!-- Container END -->
+</main>
+
+
+<!--    Javascript files for image upload-->
+<div th:replace="partials::scriptTags"/>
+</body>
+
+
+</html>
