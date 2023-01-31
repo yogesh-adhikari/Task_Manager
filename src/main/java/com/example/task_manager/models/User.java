@@ -27,7 +27,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String password;
 
     @Column
@@ -45,10 +45,14 @@ public class User {
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        firstName = copy.firstName;
+        lastName = copy.lastName;
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        profilePicture = copy.profilePicture;
     }
+
 
     public User(long id, String firstName, String lastName, String email, String password,String username) {
         this.id = id;

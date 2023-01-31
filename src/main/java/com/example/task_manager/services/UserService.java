@@ -3,6 +3,7 @@ package com.example.task_manager.services;
 
 import com.example.task_manager.models.User;
 import com.example.task_manager.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,6 @@ public class UserService {
     private final UserRepository userDao;
 
     @Autowired
-    private UserRepository userRepository;
-
     public UserService(UserRepository userDao) {
         this.userDao = userDao;
 

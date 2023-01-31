@@ -22,7 +22,7 @@ public class Categories {
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "categoryId")
-    private Categories categories;
+    private Categories categoryId;
 
     @Column(length = 30)
     private String categoryName;
@@ -32,14 +32,14 @@ public class Categories {
     public Categories() {
     }
 
-    public Categories(Categories categories, String categoryName) {
-        this.categories = categories;
+    public Categories(Categories categoryId, String categoryName) {
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
-    public Categories(Long id, Categories categories, String categoryName) {
+    public Categories(Long id, Categories categoryId, String categoryName) {
         this.id = id;
-        this.categories = categories;
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 }

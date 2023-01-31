@@ -3,6 +3,7 @@ package com.example.task_manager.controller;
 import com.example.task_manager.models.User;
 import com.example.task_manager.repositories.UserRepository;
 import com.example.task_manager.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+@AllArgsConstructor
 @Controller
 public class UserController {
 

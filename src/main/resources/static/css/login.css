@@ -4,3 +4,11 @@
 .card-body{
     margin: auto;
 }
+
+.navContainer{
+    display: flex;
+    justify-content:space-between ;
+    position: center;
+    ;
+
+}

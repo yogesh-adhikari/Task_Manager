@@ -1,6 +1,7 @@
 package com.example.task_manager;
 
 import com.example.task_manager.services.UserDetailsLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
 
-    private UserDetailsLoader usersLoader;
+    private final UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -35,10 +36,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/userProfile") // user's home page, it can be any URL
+                .defaultSuccessUrl("/task") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login.html page
 
                 /* Logout configuration */
@@ -49,23 +51,32 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/signup","/js/**","/login", "/css/**") // anyone can see the home and the ads pages
+                .antMatchers("/", "/users/signup/**","/js/**", "/css/**") // anyone can see the home and the ads pages
                 .permitAll()
+
+
 
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/tasks", //only authenticated users can create ads
-                        "/userProfile"
+                        "/feed/**",
+                        "/userProfile/**",
+                        "/tasks/createTask/**",
+                        "/createTask/**",
+                        "/editTask/**",
+                        "/categories/**",
+                        "/status/**",
+                        "/completeTask/**"
+
                 )
                 .authenticated()
 
 
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
 
 //                *****************************************************************************
                 .and()

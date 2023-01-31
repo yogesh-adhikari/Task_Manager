@@ -1,57 +1,50 @@
 package com.example.task_manager.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.Cascade;
+
+import com.example.task_manager.models.Categories;
+import com.example.task_manager.models.User;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Setter
+@Getter
 @Entity
-@Table (name ="task")
 public class Task {
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "userId")
-    private User user;
-
-    @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "categoryId")
-    private Categories categories;
-
-    @Column(length = 512)
-    private String title;
-
-    @Column(length = 2048)
     private String description;
 
-    @Column(updatable = false)
-    private Date CreatedAt;
+    @Column(name = "completed")
+    private boolean Completed;
 
-    @Column(updatable = true)
-    private Date DueDate;
+    @Column(name = "scheduled")
 
-    //Constructors
+    private boolean Scheduled;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Categories category;
 
-    public Task(long id, User user, Categories categories, String title, String description, Date createdAt, Date dueDate) {
-        this.id = id;
-        this.user = user;
-        this.categories = categories;
-        this.title = title;
-        this.description = description;
-        CreatedAt = createdAt;
-        DueDate = dueDate;
-    }
+    @Column(name = "createdAt")
+    private LocalDate dateCreated;
 
-    public Task() {
-    }
+    private LocalDate dueDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "taskCategoryName")
+    private String taskCategoryName;
 
 }

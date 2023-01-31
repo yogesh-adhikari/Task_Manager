@@ -147,10 +147,4 @@ public class ProfileController
 
         return "redirect:/userProfile";
     }
-
-    @PostMapping("/delete")
-    public String deleteUser()
-    {
-        return "redirect:/login";
-    }
 }
